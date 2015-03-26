@@ -4,8 +4,8 @@
 </head>
 <script src='scripts/jquery-1.11.2.min.js'></script>
 <script src='scripts/jquery-ui.min.js'></script>
-<link rel='stylesheet' type='text/css' href='style/test.css'>
-<link rel='stylesheet' type='text/css' href='style/jquery-ui.min.css'>
+<link rel='stylesheet' type='text/css' href='stylesheets/screen.css'>
+<link rel='stylesheet' type='text/css' href='stylesheets/jquery-ui.min.css'>
 <table class = 'testTable'>
 <tr><th>patch</th><th>user</th><th>starting time</th><th>status</th><th>metrics</th><th>build</th><th>unit tests</th><th> functional tests</th>
 </tr>
@@ -13,14 +13,30 @@
 <script type = 'text/javascript'>
 	var arr=[], daytime = [],l = 'P';
 	var status = 'pending',
-		btest = "<img id ='t' src='images/test/"+l+".jpg'></img>",
-		ftest="<img id ='t' src ='images/test/"+l+".jpg'></img>",
-		utest="<img id ='t' src = 'images/test/"+l+".jpg'></img>", 
-		metric = "<img id ='t' src='images/test/"+l+".jpg'></img>",
+		btest = "<img id ='t' src='images/test/P.jpg'></img>",
+		ftest="<img id ='t' src ='images/test/P.jpg'></img>",
+		utest="<img id ='t' src = 'images/test/P.jpg'></img>", 
+		metric = "<img id ='t' src='images/test/P.jpg'></img>",
 		resul = 0;
 	$.getJSON("data/patch.json", function( data ){ 
 		$.each( data, function( key, val ){
 			daytime[ key ] = val.day+' '+val.time;
+			$('.testTable').on("click", function( ){
+				resul = res ( key );
+				if( resul < 21 ){
+					l = 'R';
+				}
+				else if( (resul >20) & (resul<51)){
+					l = 'C';
+				}
+				else if ( (resul> 51) & (resul< 70)){
+					l = 'RJ';
+				}
+				else{
+					l = 'A';
+				}
+				changeState( $(this), key );
+			});
 			arr[key] = $("<tr class='"+ key +"'><td class='tid'><img id='tidIm' src='images/state/P.jpg' /> " + val.id + 
 				"</td><td class='user'>"+ val.user + "</td><td class='day'>  </td><td class='state'>" + status + "</td><td class='metric'>" + metric + 
 				"</td><td class = 'build'>" + btest + "</td><td class = 'unit'>"+ utest + 
@@ -56,22 +72,6 @@
 				showImg( $(this));
 			});
 			$('.testTable').append( arr[key] );
-			$('.testTable').on("click", function( ){
-				resul = res ( key );
-				if( resul < 21 ){
-					l = 'R';
-				}
-				else if( (resul >20) & (resul<51)){
-					l = 'C';
-				}
-				else if ( (resul> 51) & (resul< 70)){
-					l = 'RJ';
-				}
-				else{
-					l = 'A';
-				}
-				changeState( $(this), key );
-			});
 		});
 	});
 
@@ -108,8 +108,7 @@
 		row.find('#buIm').remove();
 		row.find('#utIm').remove();
 		row.find('#ftIm').remove();
-		testImgHide( row );
-		testImgAdd( row);
+		testImgAdd( row );
 	}
 	function showImg( row ){
 		row.find('#tidIm').attr('src', 'images/state/'+l+'.jpg');
@@ -117,13 +116,14 @@
 	}
 	function addImg( row, key ){
 		testImgHide( row );
-		row.find('.user').append( $("<br/><img id ='meIm' src = 'images/state/"+key+"/met.jpg'/>" ));
+		//row.find('#t').attr('src', 'images/test/'+l+'.jpg').hide();
+		row.find('.user').append( $("<br/><img id ='meIm' src = 'images/state/"+key+"/metric.jpg'/>" ));
 		row.find('.state').append($("<br/><img id ='buIm' src ='images/state/"+key+"/build.jpg'/>")); 
 		row.find('.metric').append($("<br><img id = 'utIm' src='images/state/"+key+"/ut.jpg'/> "));
 		row.find('.build').append($("<br/><img id = 'ftIm' src='images/state/"+key+"/funct.jpg'/>"));
 	}
 	function testImgHide(row){
-		row.find('#t').hide();
+		row.find('#t').attr('src', 'images/test/'+l+'.jpg').hide();
 	}
 	function testImgAdd ( row ){
 		row.find('#t').attr('src', 'images/test/'+l+'.jpg').show();
@@ -139,7 +139,7 @@
 			break;
 			case 3: rt = 25;
 			break;
-			case 4: rt = 0;
+			case 4: rt = 2;
 			break;
 		}
 		return rt;

@@ -11,12 +11,12 @@
 </tr>
 </table>
 <script type = 'text/javascript'>
-	var arr=[], daytime = [],l = 'P';
+	var arr=[], daytime = [],l = 'Pn';
 	var status = 'pending',
-		btest = "<img id ='t' src='images/test/P.jpg'></img>",
-		ftest="<img id ='t' src ='images/test/P.jpg'></img>",
-		utest="<img id ='t' src = 'images/test/P.jpg'></img>", 
-		metric = "<img id ='t' src='images/test/P.jpg'></img>",
+		btest = "<img id ='t' src='images/test/Pn.jpg'></img>",
+		ftest="<img id ='t' src ='images/test/Pn.jpg'></img>",
+		utest="<img id ='t' src = 'images/test/Pn.jpg'></img>", 
+		metric = "<img id ='t' src='images/test/Pn.jpg'></img>",
 		resul = 0;
 	$.getJSON("data/patch.json", function( data ){ 
 		$.each( data, function( key, val ){
@@ -47,7 +47,7 @@
 					//alert(s);
 					switch(s){
 						case 'pending':
-						l ='P';
+						l ='Pn';
 						break;
 						case 'running':
 						l = 'R';
@@ -83,7 +83,7 @@
 	function changeState( row, key ){
 		var state =' ';
 		switch( l ){
-			case 'P':
+			case 'Pn':
 				state ='pending';
 			break;
 			case 'R':

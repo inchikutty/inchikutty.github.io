@@ -1,1 +1,150 @@
-Hello World
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<script src='scripts/jquery-1.11.2.min.js'></script>
+<script src='scripts/jquery-ui.min.js'></script>
+<link rel='stylesheet' type='text/css' href='style/test.css'>
+<link rel='stylesheet' type='text/css' href='style/jquery-ui.min.css'>
+<table class = 'testTable'>
+<tr><th>patch</th><th>user</th><th>starting time</th><th>status</th><th>metrics</th><th>build</th><th>unit tests</th><th> functional tests</th>
+</tr>
+</table>
+<script type = 'text/javascript'>
+	var arr=[], daytime = [],l = 'P';
+	var status = 'pending',
+		btest = "<img id ='t' src='images/test/"+l+".jpg'></img>",
+		ftest="<img id ='t' src ='images/test/"+l+".jpg'></img>",
+		utest="<img id ='t' src = 'images/test/"+l+".jpg'></img>", 
+		metric = "<img id ='t' src='images/test/"+l+".jpg'></img>",
+		resul = 0;
+	$.getJSON("data/patch.json", function( data ){ 
+		$.each( data, function( key, val ){
+			daytime[ key ] = val.day+' '+val.time;
+			arr[key] = $("<tr class='"+ key +"'><td class='tid'><img id='tidIm' src='images/state/P.jpg' /> " + val.id + 
+				"</td><td class='user'>"+ val.user + "</td><td class='day'>  </td><td class='state'>" + status + "</td><td class='metric'>" + metric + 
+				"</td><td class = 'build'>" + btest + "</td><td class = 'unit'>"+ utest + 
+				"</td><td class = 'func'>"+ ftest + "</td>"+ "</tr>")
+				.on('mouseover',function(){
+				// for dynamically created rows introduce expand and collapse
+					var s = $(this).find('.state').text();
+					//alert(s);
+					switch(s){
+						case 'pending':
+						l ='P';
+						break;
+						case 'running':
+						l = 'R';
+						break;
+						case 'complete':
+						l = 'C';
+						break;
+						case 'accepted':
+						l = 'A';
+						break;
+						case 'rejected':
+						l = 'RJ';
+						break;
+					}
+					removeImg ( $(this));
+					addImg( $(this), key);
+				});
+			arr[key].on("mouseout", function(){
+				removeImg ( $(this));
+			});
+			arr[key].on("change", function(){
+				showImg( $(this));
+			});
+			$('.testTable').append( arr[key] );
+			$('.testTable').on("click", function( ){
+				resul = res ( key );
+				if( resul < 21 ){
+					l = 'R';
+				}
+				else if( (resul >20) & (resul<51)){
+					l = 'C';
+				}
+				else if ( (resul> 51) & (resul< 70)){
+					l = 'RJ';
+				}
+				else{
+					l = 'A';
+				}
+				changeState( $(this), key );
+			});
+		});
+	});
+
+	setTimeout(function () {
+			$('.testTable').trigger('click');
+	}, 2000);
+
+// define functions
+	function changeState( row, key ){
+		var state =' ';
+		switch( l ){
+			case 'P':
+				state ='pending';
+			break;
+			case 'R':
+				state = 'running';
+			break;
+			case 'C':
+				state = 'complete';
+			break;
+			case 'A':
+				state = 'accepted';
+			break;
+			case 'RJ':
+				state = 'rejected';
+			break;
+		}
+		row.find('.'+key+' .state').html( state );
+		row.find('.'+key).trigger( 'change');
+	}
+	function removeImg( row){
+		row.find( 'br' ).remove();
+		row.find('#meIm').remove();
+		row.find('#buIm').remove();
+		row.find('#utIm').remove();
+		row.find('#ftIm').remove();
+		testImgHide( row );
+		testImgAdd( row);
+	}
+	function showImg( row ){
+		row.find('#tidIm').attr('src', 'images/state/'+l+'.jpg');
+		testImgAdd( row );
+	}
+	function addImg( row, key ){
+		testImgHide( row );
+		row.find('.user').append( $("<br/><img id ='meIm' src = 'images/state/"+key+"/metric.jpg'/>" ));
+		row.find('.state').append($("<br/><img id ='buIm' src ='images/state/"+key+"/build.jpg'/>")); 
+		row.find('.metric').append($("<br><img id = 'utIm' src='images/state/"+key+"/ut.jpg'/> "));
+		row.find('.build').append($("<br/><img id = 'ftIm' src='images/state/"+key+"/funct.jpg'/>"));
+	}
+	function testImgHide(row){
+		row.find('#t').hide();
+	}
+	function testImgAdd ( row ){
+		row.find('#t').attr('src', 'images/test/'+l+'.jpg').show();
+	}
+	function res( key){//test results of patch
+		var rt = 0;
+		switch(key){
+			case 0: rt = 92;
+			break;
+			case 1: rt = 65;
+			break;
+			case 2: rt = 45;
+			break;
+			case 3: rt = 25;
+			break;
+			case 4: rt = 0;
+			break;
+		}
+		return rt;
+	}
+
+
+</script>
+</HTML>

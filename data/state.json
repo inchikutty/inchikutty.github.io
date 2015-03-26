@@ -1,0 +1,12 @@
+[{
+	'state':[
+	{
+		'r':'Running',
+		'a':'Accepted',
+		'p':'Pending',
+		'c':'Complete',
+		'rj':'Rejected'
+		}
+	]
+}]
+	

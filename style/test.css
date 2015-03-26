@@ -1,0 +1,23 @@
+table{
+		width:100%; 
+		border-collapse: collapse; 
+		background-color: #f8f8f8;
+}
+td{ 
+		padding:7px;
+		padding-top: .5em;
+		padding-bottom: .5em;
+}
+	/* Define the default color for all the table rows */ 
+tr{
+		border:gray 1px solid;
+		border-spacing: .5em;
+		background: -webkit-linear-gradient(left, f8f8f8, white); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(right, f8f8f8, white); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(right, f8f8f8, white); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(to right, f8f8f8, white); /* Standard syntax (must be last) */
+}
+	/* Define the hover highlight color for the table row */
+tr:hover {
+          background-color: #ffff99;
+}

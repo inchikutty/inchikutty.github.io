@@ -36,13 +36,25 @@ ol, ul {
 
 /* line 26, c:/RailsInstaller/Ruby2.0.0/lib/ruby/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width:100%;
-  background-color: #f8f8f8;
+		border: solid 1px #DDEEEE;
+		font: normal 13px Arial, sans-serif;
+		border-collapse: collapse;
+		border-spacing: 0;
+		width:100%;
+		background-color: #f8f8f8;
+}
+th {
+    background-color: #DDEFEF;
+    border: solid 1px #DDEEEE;
+    color: #336B6B;
+    padding: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
 }
 td{ 
-		padding:7px;
+		color: #333;
+		padding: 10px;
+		text-shadow: 1px 1px 1px #fff;
 		padding-top: .5em;
 		padding-bottom: .5em;
 }
@@ -57,7 +69,7 @@ tr{
 }
 	/* Define the hover highlight color for the table row */
 tr:hover {
-          background-color: #ffff99;
+          background-color: white;
 }
 
 /* line 28, c:/RailsInstaller/Ruby2.0.0/lib/ruby/gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */

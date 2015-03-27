@@ -44,7 +44,6 @@
 				.on('mouseover',function(){
 				// for dynamically created rows introduce expand and collapse
 					var s = $(this).find('.state').text();
-					//alert(s);
 					switch(s){
 						case 'pending':
 						l ='Pn';
@@ -100,6 +99,7 @@
 			break;
 		}
 		row.find('.'+key+' .state').html( state );
+		row.find('.'+key+' .day').html( daytime[key]);
 		row.find('.'+key).trigger( 'change');
 	}
 	function removeImg( row){
@@ -108,19 +108,25 @@
 		row.find('#buIm').remove();
 		row.find('#utIm').remove();
 		row.find('#ftIm').remove();
-		testImgAdd( row );
+		row.find('#resIm').remove();
+		testImgAdd ( row );
 	}
 	function showImg( row ){
 		row.find('#tidIm').attr('src', 'images/state/'+l+'.jpg');
-		testImgAdd( row );
 	}
 	function addImg( row, key ){
-		testImgHide( row );
-		//row.find('#t').attr('src', 'images/test/'+l+'.jpg').hide();
-		row.find('.user').append( $("<br/><img id ='meIm' src = 'images/state/"+key+"/met.jpg'/>" ));
+		testImgHide(row);
 		row.find('.state').append($("<br/><img id ='buIm' src ='images/state/"+key+"/build.jpg'/>")); 
 		row.find('.metric').append($("<br><img id = 'utIm' src='images/state/"+key+"/ut.jpg'/> "));
 		row.find('.build').append($("<br/><img id = 'ftIm' src='images/state/"+key+"/funct.jpg'/>"));
+		switch(l){
+			case 'RJ':
+			case 'A':
+			case 'C':
+			row.find('.user').append( $("<br/><img id ='meIm' src = 'images/state/"+key+"/"+l+"met.jpg'/>" ));
+			row.find('.func').append( $("<br/><img id ='resIm' src = 'images/state/"+key+"/"+l+"res.jpg'/>" ));
+			break;
+		}
 	}
 	function testImgHide(row){
 		row.find('#t').attr('src', 'images/test/'+l+'.jpg').hide();

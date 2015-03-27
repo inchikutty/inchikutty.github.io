@@ -79,24 +79,35 @@
 
 // define functions
 	function changeState( row, key ){
-		var state =' ';
+		var state =' ',colr = ' ', bcolr =' ';
 		switch( l ){
 			case 'Pn':
 				state ='pending';
+				colr = '#E0EBEB';
+				bcolr ='grey';
 			break;
 			case 'R':
 				state = 'running';
+				colr = '#DAECFF';
+				bcolr ='blue';
 			break;
 			case 'C':
 				state = 'complete';
+				colr  = 'azure';
+				bcolr = 'green';
 			break;
 			case 'A':
 				state = 'accepted';
+				colr  = '#EBFFD6f0';
+				bcolr ='green';
 			break;
 			case 'RJ':
 				state = 'rejected';
+				colr = '#FFCCCC';
+				bcolr = 'red';
 			break;
 		}
+		//row.find('.'+key).css({'background-color': colr, 'border-color': bcolr });
 		row.find('.'+key+' .state').html( state );
 		row.find('.'+key+' .day').html( daytime[key]);
 		row.find('.'+key).trigger( 'change');

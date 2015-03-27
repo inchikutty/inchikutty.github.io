@@ -54,14 +54,17 @@ th {
 td{ 
 		color: #333;
 		padding: 10px;
+		border-collapse: collapse;
 		text-shadow: 1px 1px 1px #fff;
 		padding-top: .5em;
 		padding-bottom: .5em;
 }
 	/* Define the default color for all the table rows */ 
 tr{
-		border:gray 1px solid;
+		border:AliceBlue 10px solid;
+		padding: 25px;
 		border-collapse: separate;
+		border-spacing: 5em;
 		background: -webkit-linear-gradient(left, f8f8f8, white); /* For Safari 5.1 to 6.0 */
 		background: -o-linear-gradient(right, f8f8f8, white); /* For Opera 11.1 to 12.0 */
 		background: -moz-linear-gradient(right, f8f8f8, white); /* For Firefox 3.6 to 15 */

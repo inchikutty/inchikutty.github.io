@@ -13,34 +13,15 @@
 <script type = 'text/javascript'>
 	var arr=[], daytime = [],l = 'Pn';
 	var status = 'pending',
-		btest = "<img id ='t' src='images/test/Pn.jpg'></img>",
-		ftest="<img id ='t' src ='images/test/Pn.jpg'></img>",
-		utest="<img id ='t' src = 'images/test/Pn.jpg'></img>", 
-		metric = "<img id ='t' src='images/test/Pn.jpg'></img>",
+		test = "<img id ='t' src='images/test/Pn.jpg'></img>",
 		resul = 0;
 	$.getJSON("data/patch.json", function( data ){ 
 		$.each( data, function( key, val ){
 			daytime[ key ] = val.day+' '+val.time;
-			$('.testTable').on("click", function( ){
-				resul = res ( key );
-				if( resul < 21 ){
-					l = 'R';
-				}
-				else if( (resul >20) & (resul<51)){
-					l = 'C';
-				}
-				else if ( (resul> 51) & (resul< 70)){
-					l = 'RJ';
-				}
-				else{
-					l = 'A';
-				}
-				changeState( $(this), key );
-			});
-			arr[key] = $("<tr class='"+ key +"'><td class='tid'><img id='tidIm' src='images/state/P.jpg' /> " + val.id + 
-				"</td><td class='user'>"+ val.user + "</td><td class='day'>  </td><td class='state'>" + status + "</td><td class='metric'>" + metric + 
-				"</td><td class = 'build'>" + btest + "</td><td class = 'unit'>"+ utest + 
-				"</td><td class = 'func'>"+ ftest + "</td>"+ "</tr>")
+			arr[key] = $("<tr class='"+ key +"'><td class='tid'><img id='tidIm' src='images/state/P.jpg' /><a> " + val.id + 
+				"<a/></td><td class='user'>"+ val.user + "</td><td class='day'>  </td><td class='state'>" + status + "</td><td class='metric'>" + test + 
+				"</td><td class = 'build'>" + test + "</td><td class = 'unit'>"+ test + 
+				"</td><td class = 'func'>"+ test + "</td>"+ "</tr>")
 				.on('mouseover',function(){
 				// for dynamically created rows introduce expand and collapse
 					var s = $(this).find('.state').text();
@@ -61,19 +42,37 @@
 						l = 'RJ';
 						break;
 					}
+					testImgHide( $(this) );
 					removeImg ( $(this));
 					addImg( $(this), key);
 				});
 			arr[key].on("mouseout", function(){
 				removeImg ( $(this));
+				testImgAdd ( $(this) );
 			});
 			arr[key].on("change", function(){
 				showImg( $(this));
+				$(this).find('#t').attr('src', 'images/test/'+l+'.jpg');
 			});
 			$('.testTable').append( arr[key] );
+			$('.testTable').on("click", function( ){
+				resul = res ( key );
+				if( resul < 21 ){
+					l = 'R';
+				}
+				else if( (resul >20) & (resul<51)){
+					l = 'C';
+				}
+				else if ( (resul> 51) & (resul< 70)){
+					l = 'RJ';
+				}
+				else{
+					l = 'A';
+				}
+				changeState( $(this), key );
+			});
 		});
 	});
-
 	setTimeout(function () {
 			$('.testTable').trigger('click');
 	}, 2000);
@@ -109,13 +108,11 @@
 		row.find('#utIm').remove();
 		row.find('#ftIm').remove();
 		row.find('#resIm').remove();
-		testImgAdd ( row );
 	}
 	function showImg( row ){
 		row.find('#tidIm').attr('src', 'images/state/'+l+'.jpg');
 	}
 	function addImg( row, key ){
-		testImgHide(row);
 		row.find('.state').append($("<br/><img id ='buIm' src ='images/state/"+key+"/build.jpg'/>")); 
 		row.find('.metric').append($("<br><img id = 'utIm' src='images/state/"+key+"/ut.jpg'/> "));
 		row.find('.build').append($("<br/><img id = 'ftIm' src='images/state/"+key+"/funct.jpg'/>"));
@@ -129,23 +126,29 @@
 		}
 	}
 	function testImgHide(row){
-		row.find('#t').attr('src', 'images/test/'+l+'.jpg').hide();
+		row.find('.metric #t').attr('src', 'images/test/'+l+'.jpg').hide();
+		row.find('.build #t').attr('src', 'images/test/'+l+'.jpg').hide();
+		row.find('.unit #t').attr('src', 'images/test/'+l+'.jpg').hide();
+		row.find('.func #t').attr('src', 'images/test/'+l+'.jpg').hide();
 	}
 	function testImgAdd ( row ){
-		row.find('#t').attr('src', 'images/test/'+l+'.jpg').show();
+		row.find('.metric #t').attr('src', 'images/test/'+l+'.jpg').show();
+		row.find('.build #t').attr('src', 'images/test/'+l+'.jpg').show();
+		row.find('.unit #t').attr('src', 'images/test/'+l+'.jpg').show();
+		row.find('.func #t').attr('src', 'images/test/'+l+'.jpg').show();
 	}
 	function res( key){//test results of patch
 		var rt = 0;
 		switch(key){
-			case 0: rt = 92;
+			case 0: rt = 45;
 			break;
 			case 1: rt = 65;
 			break;
-			case 2: rt = 45;
+			case 2: rt = 92;
 			break;
 			case 3: rt = 25;
 			break;
-			case 4: rt = 2;
+			case 4: rt = 15;
 			break;
 		}
 		return rt;

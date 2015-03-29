@@ -22,7 +22,7 @@ Longitude: <input id="lon"   type="text" size="30" class="yy"/>
 	var marker = L.marker([ 0 , 0 ]);
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    		maxZoom: 11
+    		maxZoom: 25
 	}).addTo(map);
 	inputs.on( 'input', function ( event ) {
 		inputsToMapView();

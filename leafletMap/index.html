@@ -20,7 +20,7 @@ Longitude: <input id="lon"   type="text" size="30" class="yy"/>
 	var _this = this ;
 	var popup = L.popup();
 	var marker = L.marker([ 0 , 0 ]);
-	L.tileLayer('http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     		maxZoom: 11
 	}).addTo(map);

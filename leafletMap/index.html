@@ -1,65 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-</script>
-</head>
-<body>
-<form class ='mapfield'>
-Latitude: <input id="lat"  type="text" size="30" class="xx" placeholder="latitude"/>
-Longitude: <input id="lon"   type="text" size="30" class="yy" placeholder="longitude"/>
-<div class= "search">
-<input id="search" type="text" size ="100" placeholder="Enter a location"/>
-<button id="searchButton">Search</button>
-</div>
-<div class="dynamicmap" id="map"style="width: 400px; height: 400px">
-<script type="text/javascript" >
-	var map = L.map( "map" ,{
-    		center: [0, 0], 
-    		zoom:9
-	});
-	var inputs = $(":input" );
-	var _this = this ;
-	var popup = L.popup();
-	var marker = L.marker([ 0 , 0 ]);
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    		maxZoom: 25
-	}).addTo(map);
-	inputs.on( 'input', function ( event ) {
-		inputsToMapView();
-	});
-	map.on('click', onMapClick);
-	function onMapClick(e) {
-		MapViewToinputs(e.latlng);
-	}
-	function validCoord( latd , lond ) {
-    		if( latd && lond ){
-	  		if( ( ( latd <= 90 ) && ( latd >= -90) ) && ( ( lond <= 180 ) && ( latd >= -180) ) ){
-	  			return 1;
-	  		}
-	  	}
-	  	else {
-	  		return 0; 
-	  	}
-	  }
-	  function inputsToMapView() {
-		var chk = validCoord (_this.lat.value , _this.lon.value);
-		if(chk) {
-			var latlng = L.latLng ( _this.lat.value , _this.lon.value );
-        		map.panTo( latlng );
-			marker.setLatLng(latlng).addTo(map);
-		}
-	}
-	function MapViewToinputs( LatLng ) {
-		_this.lat.value = LatLng.lat; 
-		_this.lon.value = LatLng.lng;
-		marker.setLatLng(LatLng).addTo(map);
-	}
-</script>
-</div>
-</form>
-</body>
+	<head>
+		<title> mapping with leaflet</title>
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="angular-min.js"></script>
+		<form class="form-inline" role="form">
+			<div class = "form-group">
+				<label for="lat">Latitude:</label> 
+				<input id="lat"  type="text"  class="form-control" placeholder="latitude"/>
+				<label for="lon">Longitude:</label> 
+				<input id="lon"   type="text"  class="form-control" placeholder="longitude"/>
+				<input id="search" type="text"  class="form-control" placeholder="Enter a location"/>
+				<button class ="btn-primary" id="searchButton">Search</button>
+			</div>
+		</form>
+		<div class="dynamicmap" id="map"style="width: 800px; height: 600px">
+			<script type="text/javascript" >
+				var map = L.map( "map" ,{
+					center: [0, 0], 
+					zoom:16
+				});
+				var inputs = $(".form-inline").find('#lat, #lon');
+				var _this = this ;
+				var popup = L.popup();
+				var marker = L.marker([ 0 , 0 ]);
+				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+					attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+					maxZoom: 25
+				}).addTo(map);
+				inputs.on( 'input', function ( event ) {
+					inputsToMapView();
+				});
+				map.on('click', onMapClick);
+				function onMapClick(e) {
+					MapViewToinputs(e.latlng);
+				}
+				function validCoord( latd , lond ) {
+					if( latd && lond ){
+						if( ( ( latd <= 90 ) && ( latd >= -90) ) && ( ( lond <= 180 ) && ( latd >= -180) ) ){
+							return 1;
+						}
+					}
+					else {
+						return 0; 
+					}
+				}
+				function inputsToMapView() {
+					var chk = validCoord (_this.lat.value , _this.lon.value);
+					if(chk) {
+						var latlng = L.latLng ( _this.lat.value , _this.lon.value );
+						map.panTo( latlng );
+						marker.setLatLng(latlng).addTo(map);
+					}
+				}
+				function MapViewToinputs( LatLng ) {
+					_this.lat.value = LatLng.lat; 
+					_this.lon.value = LatLng.lng;
+					marker.setLatLng(LatLng).addTo(map);
+				}
+			</script>
+		</div>
+	</body>
 </html>

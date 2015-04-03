@@ -7,22 +7,11 @@
 		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+		<link rel="stylesheet" href="map.css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="angular-min.js"></script>
-		<style type="text/css">
-			body{
-				padding-top: 100px;
-			}
-			h1{
-				color: white;
-			}
-			.map-container {
-				height: 450px;
-				width: 800px;
-			}
-		</style>
 	</head>
 	<body>
 
@@ -51,7 +40,7 @@
 			</div>
 		</nav>
 		
-		<div class="container">
+		<div class="container-fluid">
 			<div class="jumbotron">
 				<form class="form-inline" role="form">
 					<div class = "form-group">
@@ -65,7 +54,7 @@
 				</form>
 			</div>
 		</div>
-		<div class= "container">
+		<div class= "container-fluid">
 			<div class= "jumbotron">
 				<div class="map-container">
 					<script type="text/javascript" src="map.js"></script>

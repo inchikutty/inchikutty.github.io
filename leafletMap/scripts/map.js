@@ -60,6 +60,7 @@
 	function MapViewToinputs( LatLng ) {
 		this.lat.value = LatLng.lat; 
 		this.lon.value = LatLng.lng;
+		reverseGeocoding( this.lat.value, this.lon.value);
 		marker.setLatLng(LatLng).addTo(map);
 	}
 	function setTile( ){

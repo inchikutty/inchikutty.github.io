@@ -8,14 +8,14 @@ h1, label{
 @media ( orientation: landscape){
 	@media (max-width: 500px) {
 		.map-container {
-			height: 200px;
-			width: 400px;
+			height: 300px;
+			width: 450px;
 		}
 	}
 	@media (min-width: 500px) and (max-width: 800px) {
 		.map-container {
 			height: 300px;
-			width: 600px;
+			width: 60px;
 		}
 	}
 	@media (min-width: 800px){

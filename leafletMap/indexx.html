@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title> mapping with leaflet</title>
+		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+		<!link rel="stylesheet" href="map.css" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			.map-container{
+				width: 90%;
+				height:500px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+		    <div class="row">
+				<div class="span9">
+					<nav id="mapNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+					<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header" >
+							<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle btn-primary">
+								<span class="sr-only">Toggle to input coordinates</span>
+							</button>
+						</div>
+						<div id="navbarCollapse" class="collapse navbar-collapse">
+							<form class="form-inline" role="form">
+								<div class = "form-group">
+									<label for="lat">Latitude:</label> 
+									<input id="lat"  type="text"  class="form-control" placeholder="latitude"/>
+									<label for="lon">Longitude:</label> 
+									<input id="lon"   type="text"  class="form-control" placeholder="longitude"/>
+									<input id="search" type="text"  class="form-control" placeholder="Enter a location"/>
+									<button class ="btn-primary" id="searchButton">Search</button>
+								</div>
+							</form>
+						</div>
+					</nav>
+					<div class="row">
+						<div class="span6">
+							<div class="map-container container-fluid">
+								<script type="text/javascript" src="map.js"></script>
+							</div>
+						</div>
+						<div class="span3">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

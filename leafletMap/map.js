@@ -3,12 +3,13 @@
 			center: [0, 0], 
 			zoom:16
 		}), type = "transport", inputs = $(".form-inline").find('#lat, #lon'),
-		popup = L.popup(), marker = L.marker([ 0 , 0 ]), layerTile = tile(type),
-		tileLayer = L.tileLayer( ""+layerTile+"", {
+		popup = L.popup(), marker = L.marker([ 0 , 0 ]), layerTile;
+		tile ( type );
+		var tileLayer = L.tileLayer( ""+layerTile+"", {
 			attribution: "Map data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors,"+
 				" <a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>",
 			maxZoom: 25
-		}).addTo(map);
+		}).addTo(map), btnVert = $( '.btn-group-vertical').find('.btn');
 
 
 		inputs.on( 'input keyup change cut paste', function ( event ) {
@@ -25,6 +26,10 @@
 		$( 'body #searchButton' ).click( function () {
 			geocoding( $( 'body #search' ).val() );
 		} );
+		btnVert.on('click', function(){
+			tile ( $(this).attr("id") );
+			setTile();
+		});
 
 
 	function onMapClick(e) {
@@ -57,32 +62,30 @@
 		this.lon.value = LatLng.lng;
 		marker.setLatLng(LatLng).addTo(map);
 	}
-	function setTile(){
+	function setTile( ){
 		tileLayer.setUrl( ""+layerTile+"").addTo( map);
 	}
 	function tile( t ){
-		var url ="";
 		switch( t ){
 			case "transport":
-			url = "http://b.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png";
+			layerTile = "http://b.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png";
 			break;
 			case "hikebike":
-			url = "http://toolserver.org/tiles/hikebike/{z}/{x}/{y}.png";
+			layerTile = "http://toolserver.org/tiles/hikebike/{z}/{x}/{y}.png";
 			break;
 			case "sea":
-			url = "http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png";
+			layerTile = "http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png";
 			break;
 			case "human":
-			url = "http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
+			layerTile = "http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 			break;
 			case "mapquest":
-			url = "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png";
+			layerTile = "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png";
 			break;
 			default:
-			url = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
+			layerTile = "http://{s}.tile.osm.org/{z}/{x}/{y}.png";
 			
 		}
-		return url;
 	}
 	function geocoding( address ) {
 		var _this = this;
@@ -259,6 +262,6 @@
 				} );
 			}
 			$( 'body #search' ).attr( 'placeholder', 'Search a place' );
-			$( 'body #search' ).val( address);
+			$( 'body #address' ).text( address);
 		
 	}

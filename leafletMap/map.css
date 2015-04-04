@@ -1,8 +1,9 @@
-.form-inline{
-	padding-top: 100px;
-}
-h1{
+
+h1, label{
 	color: white;
+}
+.map-container {
+	padding: 10%;
 }
 @media ( orientation: landscape){
 	@media (max-width: 500px) {

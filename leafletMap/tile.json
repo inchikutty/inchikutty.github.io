@@ -1,0 +1,26 @@
+[
+	{
+		"type":"default" 
+		"url": "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+	},
+	{
+		"type": "transport"
+		"url": "http://b.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png"
+	},
+	{
+		"type": "hikebike"
+		"url": "http://toolserver.org/tiles/hikebike/{z}/{x}/{y}.png"
+	},
+	{
+		"type": "sea"
+		"url" : "http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"
+	},
+	{
+		"type":"human"
+		"url" : "http://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+	},
+	{
+		"type":"mapquest"
+		"url" : "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png"
+	}
+ ]

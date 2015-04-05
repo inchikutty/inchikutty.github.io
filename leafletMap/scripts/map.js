@@ -90,8 +90,7 @@
 	}
 	function geocoding( address ) {
 		var _this = this;
-		var array= address.split( /\s*,\s*/ );
-		var data=[];
+		var array= address.split( /\s*,\s*/ ), data;
 		$.each( array, function ( i, a ) {
 			if ( a.match( /(^[0-9\s\(\)\[\]\/\.\,\:\;\-]+$)/ ) ) {
 				array[i] = null;
@@ -99,9 +98,13 @@
 		} );
 		address = array.join( ',' );
 		var url = "http://nominatim.openstreetmap.org/"+"search/" + address + "?format=json&addressdetails=1";
-		$.getJSON( url , function( data ) {
+		$.getJSON( url , function( dat ) {
 			console.log( "success");
-			if ( data.length ) {
+			if ( !dat.error ) {
+				data = dat;
+			}
+		});
+		if ( data.length ) {
 				var latlng = L.latLng ( data[0].lat, data[0].lon ),
 					$list = $('body').find( '#lat, #lon' );
 				$list.eq( 0 ).val( latlng.lat.toFixed( 4 ) );
@@ -112,7 +115,6 @@
 			else {
 				$( 'body #search' ).val( '' ).attr( 'placeholder', 'Incorrect search query, Search again!!' );
 			}
-		});
 	}
 	function reverseGeocoding ( latd, lond ) {
 		var url = "http://nominatim.openstreetmap.org/"+"reverse?format=json&lat="+latd+"&lon="+lond+"&addressdetails=1";

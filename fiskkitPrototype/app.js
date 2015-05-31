@@ -13,7 +13,7 @@
 			if( last!= this.url ){
 				$.ajax({
 					url: "getContent.php",
-					data:'url='+this.url,
+					data:'url='+this.url+'/',
 					type: "POST",
 					success: function(responseData){
 						if( responseData){

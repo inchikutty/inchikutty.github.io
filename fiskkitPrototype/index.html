@@ -1,18 +1,59 @@
-<html ng-app="testApp">  
-    <head lang="en">
-        <meta charset="utf-8">
-        <title>prototype</title>
-        <script type="text/javascript" src="angular-min.js"></script>
-		<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
-        <script type="text/javascript" src="app.js"></script>
-    </head>
-	<body>
-	<div ng-controller="appController">
-		<div>
-		<input id="url" ng-model= "urlContent.url" placeholder="Enter the URL" size = "200" />
-		<input id="urlBtn" type="button" value="load web content" ng-click ="urlContent.result()" />
-		</div>
-		<iframe id="ifid" width='99%' height="100%" src= "" ng-hide="{{ urlContent.status }}" ></iframe>
-	</div>
-	</body>
+<!DOCTYPE html>
+<html ng-app="fiskkitTestProject">
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+  <link href="app.less" type="text/css" rel="stylesheet/less">
+</head>
+<body>
+
+  <!-- Livereload script for development only (stripped during dist build) -->
+  <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
+
+  <!-- JS from Bower Components -->
+  <script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+  <!-- Add New Bower Component JS Above -->
+
+
+  <!-- Main App JS -->
+  <script src="app.js"></script>
+  <script src="filter/trustAsResourceUrl.js"></script>
+  <script src="directive/iframeHeight.js"></script>
+  <!-- Add New Component JS Above -->
+
+  <div>
+    <div id="content" class="container">
+      <div class="row">
+        <div ui-view>
+			<div class="header">
+				<form name="web" class="form-inline" role="form">
+					<div class="form-group">
+						<input name="src" type="url"  class="form-control" ng-model= "src" placeholder="Enter the URL" size = "80%" ng-model-options="{ debounce: 500 }"/>
+						<input id="urlBtn" class="btn-primary" type="button" value="load web content" ng-click ="toggle()" ng-show="web.src.$valid" />
+					</div>
+				</form>
+				<div class="msg" role="alert">
+					<span class="error" ng-show="web.src.$error.url">Not valid url!</span>
+				</div>
+			</div>
+			<div>
+				<iframe iframe-height class="well" id="ifid" ng-src= "{{ src | trustAsResourceUrl }}" ng-show="status" ></iframe>
+			</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>
